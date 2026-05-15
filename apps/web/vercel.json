@@ -1,6 +1,6 @@
 {
-  "installCommand": "npm_config_production=false pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm turbo run build --filter=@kairos/web",
-  "outputDirectory": "apps/web/.next",
+  "installCommand": "cd ../.. && npm_config_production=false pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm turbo run build --filter=@kairos/web",
+  "outputDirectory": ".next",
   "framework": "nextjs"
 }
