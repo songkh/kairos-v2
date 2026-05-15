@@ -9,7 +9,7 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>): JSX.Element {
+}>): React.ReactElement {
   return (
     <html lang="ja">
       <body>{children}</body>
