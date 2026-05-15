@@ -1,0 +1,135 @@
+// Kairos v2 — Prisma スキーマ
+//
+// 接続設定（セキュリティルール §6）:
+//   DATABASE_URL:  pooler URL (port 6543) + pgbouncer=true&connection_limit=1
+//   DIRECT_URL:    マイグレーション専用 (port 5432)
+//
+// PostGIS 拡張: Supabase ダッシュボードで有効化が必要
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+  // PgBouncer + Prisma: pooler URL port 6543 + connection_limit=1 必須
+}
+
+// ── ユーザー ──────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  USER
+  COACH
+  ADMIN
+}
+
+model User {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  // 認証プロバイダー（いずれか 1 つ以上必須）
+  lineUserId  String?  @unique @map("line_user_id")
+  appleUserId String?  @unique @map("apple_user_id")
+  googleUserId String? @unique @map("google_user_id")
+
+  // プロフィール
+  displayName String   @map("display_name")
+  avatarUrl   String?  @map("avatar_url")
+  bio         String?
+  role        UserRole @default(USER)
+
+  // 自宅座標（APPI: API レスポンスには絶対に含めない）
+  // GPS ぼかし処理（500m）に使用。DB のみに保存
+  homeLatitude  Float?  @map("home_latitude")
+  homeLongitude Float?  @map("home_longitude")
+
+  // Pace Passport
+  paceBand    String?  @map("pace_band") // S/A/B/C/D
+
+  // リレーション
+  activities     Activity[]
+  paceRatings    PaceRating[]
+
+  @@map("users")
+}
+
+// ── アクティビティ ─────────────────────────────────────────────────────────────
+
+enum ActivityType {
+  RUN
+  WALK
+  TRAIL_RUN
+  VIRTUAL_RUN
+}
+
+enum ActivityPrivacy {
+  PUBLIC
+  FOLLOWERS_ONLY
+  PRIVATE
+}
+
+model Activity {
+  id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime        @updatedAt @map("updated_at") @db.Timestamptz
+
+  userId     String         @map("user_id") @db.Uuid
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type       ActivityType   @default(RUN)
+  privacy    ActivityPrivacy @default(PRIVATE)
+
+  // 統計
+  distanceM  Float          @map("distance_m")
+  durationSec Int           @map("duration_sec")
+  avgPaceSec Float          @map("avg_pace_sec")
+  elevationGainM Float?     @map("elevation_gain_m")
+  avgHeartRate   Int?       @map("avg_heart_rate")
+  maxHeartRate   Int?       @map("max_heart_rate")
+
+  // タイムスタンプ
+  startedAt  DateTime       @map("started_at") @db.Timestamptz
+  finishedAt DateTime       @map("finished_at") @db.Timestamptz
+
+  // GPS トラック（JSON — 速度検証済み後のポイント列）
+  // APPI: GPS 座標は要配慮個人情報。Sentry に送らない
+  gpsTrack   Json?          @map("gps_track")
+
+  // メタデータ
+  title       String?
+  description String?
+  isManual    Boolean        @default(false) @map("is_manual")
+
+  @@index([userId, startedAt(sort: Desc)])
+  @@map("activities")
+}
+
+// ── Pace Passport（Elo レーティング）─────────────────────────────────────────
+
+enum PaceCategory {
+  FIVE_K   @map("5K")
+  TEN_K    @map("10K")
+  HALF     @map("HALF")
+  FULL     @map("FULL")
+}
+
+model PaceRating {
+  id        String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime      @updatedAt @map("updated_at") @db.Timestamptz
+
+  userId    String        @map("user_id") @db.Uuid
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  category  PaceCategory
+  // Elo レーティング（デフォルト 1200、最小 800、最大 2400）
+  rating    Int           @default(1200)
+  // 直近ペース（秒/km）
+  recentPaceSec Float?    @map("recent_pace_sec")
+
+  @@unique([userId, category])
+  @@map("pace_ratings")
+}

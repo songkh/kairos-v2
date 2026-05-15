@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop, "sprint/**"]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: "20"
+  PNPM_VERSION: "9.15.0"
+
+jobs:
+  type-check:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm turbo run type-check
+        env:
+          DATABASE_URL: "postgresql://postgres:password@localhost:5432/kairos_test?pgbouncer=true&connection_limit=1"
+          DIRECT_URL: "postgresql://postgres:password@localhost:5432/kairos_test"
+          JWT_SECRET: "test-secret-for-ci-at-least-32-characters"
+          USE_MOCKS: "true"
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm turbo run build --filter="./packages/*"
+        env:
+          DATABASE_URL: "postgresql://postgres:password@localhost:5432/kairos_test?pgbouncer=true&connection_limit=1"
+          DIRECT_URL: "postgresql://postgres:password@localhost:5432/kairos_test"
+          JWT_SECRET: "test-secret-for-ci-at-least-32-characters"
+          USE_MOCKS: "true"
+
+      - name: Run tests
+        run: pnpm turbo run test
+        env:
+          DATABASE_URL: "postgresql://postgres:password@localhost:5432/kairos_test?pgbouncer=true&connection_limit=1"
+          DIRECT_URL: "postgresql://postgres:password@localhost:5432/kairos_test"
+          JWT_SECRET: "test-secret-for-ci-at-least-32-characters"
+          USE_MOCKS: "true"

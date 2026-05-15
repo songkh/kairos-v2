@@ -1,0 +1,51 @@
+# 依存関係
+node_modules/
+.pnp
+.pnp.js
+
+# ビルド成果物
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# 環境変数（秘密情報）
+.env
+.env.local
+.env.*.local
+!.env.local.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# エディタ
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
+
+# テスト
+coverage/
+.nyc_output/
+
+# Turbo
+.turbo/
+
+# Expo / React Native
+.expo/
+apps/mobile/.expo/
+apps/mobile/android/
+apps/mobile/ios/
+*.ipa
+*.apk
+*.aab
+
+# Prisma 生成ファイル（スキーマは含める）
+packages/api/node_modules/.prisma/
+
+# ログ
+*.log
+npm-debug.log*
+pnpm-debug.log*

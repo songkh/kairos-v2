@@ -1,0 +1,128 @@
+{
+  "expo": {
+    "name": "Kairos",
+    "slug": "kairos",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "kairos",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.kairos.mobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "ランニング記録に現在地を使用します。",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "バックグラウンドランニング記録に現在地を使用します。",
+        "NSLocationAlwaysUsageDescription": "バックグラウンドランニング記録に現在地を使用します。",
+        "NSCameraUsageDescription": "プロフィール写真の撮影に使用します。",
+        "NSMicrophoneUsageDescription": "コーチングの音声メッセージ録音に使用します。",
+        "NSPhotoLibraryUsageDescription": "プロフィール写真の選択に使用します。",
+        "NSMotionUsageDescription": "ランニング時のステップカウントに使用します。",
+        "NSHealthShareUsageDescription": "Apple HealthKit とランニングデータを同期します。",
+        "NSHealthUpdateUsageDescription": "ランニングデータを Apple Health に保存します。"
+      },
+      "usesAppleSignIn": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "app.kairos.mobile",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "CAMERA",
+        "READ_MEDIA_IMAGES",
+        "RECORD_AUDIO",
+        "ACTIVITY_RECOGNITION"
+      ],
+      "googleServicesFile": "./google-services.json"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "root": "./app"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "バックグラウンドランニング記録に現在地を使用します。",
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#E8642A",
+          "sounds": []
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "プロフィール写真の撮影に使用します。"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "プロフィール写真の選択に使用します。",
+          "savePhotosPermission": "ランカードを写真に保存します。"
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "コーチングの音声メッセージ録音に使用します。"
+        }
+      ],
+      [
+        "expo-sqlite"
+      ],
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "$(MAPBOX_DOWNLOADS_TOKEN)"
+        }
+      ],
+      [
+        "stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.app.kairos.mobile",
+          "enableGooglePay": true
+        }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "kairos",
+          "project": "kairos-mobile"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "YOUR_EAS_PROJECT_ID"
+      }
+    }
+  }
+}
