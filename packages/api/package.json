@@ -11,7 +11,7 @@
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "prisma generate --schema src/prisma/schema.prisma && tsc",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
     "type-check": "tsc --noEmit",
