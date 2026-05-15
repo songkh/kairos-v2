@@ -8,7 +8,7 @@ export default function HomePage(): React.ReactElement {
       <p style={{ marginTop: 32, color: '#6B7280' }}>2026年9月 日本ローンチ予定</p>
       <div style={{ marginTop: 48, padding: 24, background: '#F7F5F0', borderRadius: 12 }}>
         <p style={{ margin: 0, fontSize: 14, color: '#6B7280' }}>
-          API: <a href={`${process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://kairos-v2-e7qr.onrender.com'}/health`} style={{ color: '#E8642A' }}>Health Check</a>
+          API: <a href="https://kairos-v2-e7qr.onrender.com/health" style={{ color: '#E8642A' }}>Health Check</a>
         </p>
       </div>
     </main>
