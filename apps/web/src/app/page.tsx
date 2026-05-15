@@ -1,4 +1,4 @@
-export default function HomePage() {
+export default function HomePage(): JSX.Element {
   return (
     <main style={{ fontFamily: 'sans-serif', maxWidth: 640, margin: '80px auto', padding: '0 24px' }}>
       <h1 style={{ fontSize: 48, fontWeight: 800, color: '#E8642A' }}>Kairos</h1>
