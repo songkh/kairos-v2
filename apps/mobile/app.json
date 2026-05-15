@@ -66,14 +66,6 @@
         }
       ],
       [
-        "expo-notifications",
-        {
-          "icon": "./assets/notification-icon.png",
-          "color": "#E8642A",
-          "sounds": []
-        }
-      ],
-      [
         "expo-camera",
         {
           "cameraPermission": "プロフィール写真の撮影に使用します。"
@@ -87,33 +79,7 @@
         }
       ],
       [
-        "expo-av",
-        {
-          "microphonePermission": "コーチングの音声メッセージ録音に使用します。"
-        }
-      ],
-      [
         "expo-sqlite"
-      ],
-      [
-        "@rnmapbox/maps",
-        {
-          "RNMapboxMapsDownloadToken": "$(MAPBOX_DOWNLOADS_TOKEN)"
-        }
-      ],
-      [
-        "stripe-react-native",
-        {
-          "merchantIdentifier": "merchant.app.kairos.mobile",
-          "enableGooglePay": true
-        }
-      ],
-      [
-        "@sentry/react-native/expo",
-        {
-          "organization": "kairos",
-          "project": "kairos-mobile"
-        }
       ]
     ],
     "experiments": {
