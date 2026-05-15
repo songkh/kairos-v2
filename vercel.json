@@ -1,9 +1,5 @@
 {
-  "buildCommand": "pnpm turbo run build --filter=@kairos/web",
-  "outputDirectory": "apps/web/.next",
-  "installCommand": "npm_config_production=false pnpm install --frozen-lockfile",
-  "framework": "nextjs",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
+  "buildCommand": "cd ../.. && npm_config_production=false pnpm install --frozen-lockfile && pnpm turbo run build --filter=@kairos/web",
+  "installCommand": "echo skip",
+  "framework": "nextjs"
 }
