@@ -36,23 +36,17 @@ export const env = {
   upstashRedisUrl: USE_MOCKS ? optional('UPSTASH_REDIS_URL') : required('UPSTASH_REDIS_URL'),
   upstashRedisToken: USE_MOCKS ? optional('UPSTASH_REDIS_TOKEN') : required('UPSTASH_REDIS_TOKEN'),
 
-  // LINE
-  lineChannelId: USE_MOCKS ? optional('LINE_CHANNEL_ID') : required('LINE_CHANNEL_ID'),
-  lineChannelSecret: USE_MOCKS
-    ? optional('LINE_CHANNEL_SECRET')
-    : required('LINE_CHANNEL_SECRET'),
-  lineLoginChannelId: USE_MOCKS
-    ? optional('LINE_LOGIN_CHANNEL_ID')
-    : required('LINE_LOGIN_CHANNEL_ID'),
-  lineLoginChannelSecret: USE_MOCKS
-    ? optional('LINE_LOGIN_CHANNEL_SECRET')
-    : required('LINE_LOGIN_CHANNEL_SECRET'),
+  // LINE（Sprint 1 では未実装 → optional）
+  lineChannelId: optional('LINE_CHANNEL_ID'),
+  lineChannelSecret: optional('LINE_CHANNEL_SECRET'),
+  lineLoginChannelId: optional('LINE_LOGIN_CHANNEL_ID'),
+  lineLoginChannelSecret: optional('LINE_LOGIN_CHANNEL_SECRET'),
 
   // Mapbox
   mapboxAccessToken: optional('MAPBOX_ACCESS_TOKEN'),
 
-  // Stripe
-  stripeSecretKey: USE_MOCKS ? optional('STRIPE_SECRET_KEY') : required('STRIPE_SECRET_KEY'),
+  // Stripe（Sprint 5 以降 → optional）
+  stripeSecretKey: optional('STRIPE_SECRET_KEY'),
   stripeWebhookSecret: optional('STRIPE_WEBHOOK_SECRET'),
 
   // Sentry
