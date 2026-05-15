@@ -17,8 +17,7 @@ async function rateLimitPlugin(fastify: FastifyInstance): Promise<void> {
     // デフォルト: 100 req/min/IP
     max: 100,
     timeWindow: '1 minute',
-    // Redis をキャッシュストアとして使う（USE_MOCKS 時はインメモリにフォールバック）
-    redis: fastify.redis as Parameters<typeof rateLimit>[0]['redis'],
+    // Upstash Redis は HTTP ベースで ioredis 非互換のためインメモリストアを使用
     keyGenerator: (request) => {
       // 認証済みリクエストはユーザー ID ベース
       const userId = (request.user as { sub?: string } | undefined)?.sub;
