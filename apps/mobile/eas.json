@@ -24,7 +24,7 @@
       },
       "env": {
         "NODE_ENV": "production",
-        "USE_MOCKS": "false"
+        "USE_MOCKS": "true"
       },
       "cache": {
         "disabled": false

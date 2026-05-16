@@ -24,19 +24,19 @@ export const env = {
   useMocks: USE_MOCKS,
 
   // Database
-  databaseUrl: required('DATABASE_URL'),
+  databaseUrl: USE_MOCKS ? optional('DATABASE_URL') : required('DATABASE_URL'),
   directUrl: optional('DIRECT_URL'),
 
   // JWT
-  jwtSecret: required('JWT_SECRET'),
+  jwtSecret: USE_MOCKS ? optional('JWT_SECRET') : required('JWT_SECRET'),
   jwtAccessTtlSec: Number(process.env['JWT_ACCESS_TTL_SEC'] ?? 900),
   jwtRefreshTtlSec: Number(process.env['JWT_REFRESH_TTL_SEC'] ?? 604800),
 
   // Redis
-  upstashRedisUrl: USE_MOCKS ? optional('UPSTASH_REDIS_URL') : required('UPSTASH_REDIS_URL'),
-  upstashRedisToken: USE_MOCKS ? optional('UPSTASH_REDIS_TOKEN') : required('UPSTASH_REDIS_TOKEN'),
+  upstashRedisUrl: optional('UPSTASH_REDIS_URL'),
+  upstashRedisToken: optional('UPSTASH_REDIS_TOKEN'),
 
-  // LINE（Sprint 1 では未実装 → optional）
+  // LINE
   lineChannelId: optional('LINE_CHANNEL_ID'),
   lineChannelSecret: optional('LINE_CHANNEL_SECRET'),
   lineLoginChannelId: optional('LINE_LOGIN_CHANNEL_ID'),
@@ -45,7 +45,7 @@ export const env = {
   // Mapbox
   mapboxAccessToken: optional('MAPBOX_ACCESS_TOKEN'),
 
-  // Stripe（Sprint 5 以降 → optional）
+  // Stripe
   stripeSecretKey: optional('STRIPE_SECRET_KEY'),
   stripeWebhookSecret: optional('STRIPE_WEBHOOK_SECRET'),
 

@@ -22,30 +22,24 @@ exports.env = {
     nodeEnv: (process.env['NODE_ENV'] ?? 'development'),
     useMocks: USE_MOCKS,
     // Database
-    databaseUrl: required('DATABASE_URL'),
+    databaseUrl: USE_MOCKS ? optional('DATABASE_URL') : required('DATABASE_URL'),
     directUrl: optional('DIRECT_URL'),
     // JWT
-    jwtSecret: required('JWT_SECRET'),
+    jwtSecret: USE_MOCKS ? optional('JWT_SECRET') : required('JWT_SECRET'),
     jwtAccessTtlSec: Number(process.env['JWT_ACCESS_TTL_SEC'] ?? 900),
     jwtRefreshTtlSec: Number(process.env['JWT_REFRESH_TTL_SEC'] ?? 604800),
     // Redis
-    upstashRedisUrl: USE_MOCKS ? optional('UPSTASH_REDIS_URL') : required('UPSTASH_REDIS_URL'),
-    upstashRedisToken: USE_MOCKS ? optional('UPSTASH_REDIS_TOKEN') : required('UPSTASH_REDIS_TOKEN'),
+    upstashRedisUrl: optional('UPSTASH_REDIS_URL'),
+    upstashRedisToken: optional('UPSTASH_REDIS_TOKEN'),
     // LINE
-    lineChannelId: USE_MOCKS ? optional('LINE_CHANNEL_ID') : required('LINE_CHANNEL_ID'),
-    lineChannelSecret: USE_MOCKS
-        ? optional('LINE_CHANNEL_SECRET')
-        : required('LINE_CHANNEL_SECRET'),
-    lineLoginChannelId: USE_MOCKS
-        ? optional('LINE_LOGIN_CHANNEL_ID')
-        : required('LINE_LOGIN_CHANNEL_ID'),
-    lineLoginChannelSecret: USE_MOCKS
-        ? optional('LINE_LOGIN_CHANNEL_SECRET')
-        : required('LINE_LOGIN_CHANNEL_SECRET'),
+    lineChannelId: optional('LINE_CHANNEL_ID'),
+    lineChannelSecret: optional('LINE_CHANNEL_SECRET'),
+    lineLoginChannelId: optional('LINE_LOGIN_CHANNEL_ID'),
+    lineLoginChannelSecret: optional('LINE_LOGIN_CHANNEL_SECRET'),
     // Mapbox
     mapboxAccessToken: optional('MAPBOX_ACCESS_TOKEN'),
     // Stripe
-    stripeSecretKey: USE_MOCKS ? optional('STRIPE_SECRET_KEY') : required('STRIPE_SECRET_KEY'),
+    stripeSecretKey: optional('STRIPE_SECRET_KEY'),
     stripeWebhookSecret: optional('STRIPE_WEBHOOK_SECRET'),
     // Sentry
     sentryDsn: optional('SENTRY_DSN'),
