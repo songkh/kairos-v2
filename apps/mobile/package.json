@@ -14,11 +14,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/runtime": "^7.29.2",
     "@kairos/geo": "workspace:*",
     "@kairos/types": "workspace:*",
     "expo": "~52.0.0",
     "expo-asset": "~11.0.4",
     "expo-av": "~15.0.1",
+    "expo-build-properties": "^55.0.14",
     "expo-camera": "~16.0.10",
     "expo-location": "~18.0.4",
     "expo-media-library": "~17.0.4",
@@ -32,8 +34,7 @@
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.3.0",
-    "react-native-web": "~0.19.13",
-    "@babel/runtime": "^7.29.2"
+    "react-native-web": "~0.19.13"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
