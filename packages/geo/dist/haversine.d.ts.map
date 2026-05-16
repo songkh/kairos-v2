@@ -1,0 +1,1 @@
+{"version":3,"file":"haversine.d.ts","sourceRoot":"","sources":["../src/haversine.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,MAAM,WAAW,MAAM;IACrB,GAAG,EAAE,MAAM,CAAC;IACZ,GAAG,EAAE,MAAM,CAAC;CACb;AAID,wBAAgB,iBAAiB,CAAC,CAAC,EAAE,MAAM,EAAE,CAAC,EAAE,MAAM,GAAG,MAAM,CAW9D"}

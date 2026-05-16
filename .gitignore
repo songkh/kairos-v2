@@ -6,6 +6,8 @@ node_modules/
 # ビルド成果物
 dist/
 build/
+# EAS Build のために packages の dist は含める
+!packages/*/dist/
 .next/
 out/
 *.tsbuildinfo

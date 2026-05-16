@@ -1,0 +1,22 @@
+"use strict";
+/**
+ * Haversine 公式による 2 点間の距離計算（メートル）
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.haversineDistance = haversineDistance;
+const EARTH_RADIUS_M = 6_371_000;
+function haversineDistance(a, b) {
+    const dLat = toRad(b.lat - a.lat);
+    const dLng = toRad(b.lng - a.lng);
+    const aVal = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(a.lat)) *
+            Math.cos(toRad(b.lat)) *
+            Math.sin(dLng / 2) *
+            Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(aVal), Math.sqrt(1 - aVal));
+    return EARTH_RADIUS_M * c;
+}
+function toRad(deg) {
+    return deg * (Math.PI / 180);
+}
+//# sourceMappingURL=haversine.js.map
