@@ -20,6 +20,9 @@ importers:
 
   apps/mobile:
     dependencies:
+      '@babel/runtime':
+        specifier: ^7.29.2
+        version: 7.29.2
       '@kairos/geo':
         specifier: workspace:*
         version: link:../../packages/geo
@@ -91,9 +94,6 @@ importers:
       '@babel/core':
         specifier: ^7.25.2
         version: 7.29.0
-      '@babel/runtime':
-        specifier: ^7.29.2
-        version: 7.29.2
       '@types/react':
         specifier: ~18.3.12
         version: 18.3.28
