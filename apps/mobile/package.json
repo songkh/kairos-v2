@@ -24,6 +24,7 @@
     "expo-camera": "~16.0.10",
     "expo-location": "~18.0.4",
     "expo-media-library": "~17.0.4",
+    "expo-modules-core": "~2.2.3",
     "expo-notifications": "~0.29.11",
     "expo-router": "~4.0.0",
     "expo-sqlite": "~15.0.4",
