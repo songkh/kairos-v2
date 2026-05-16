@@ -21,7 +21,9 @@
     "**/*.ts",
     "**/*.tsx",
     "../../packages/types/src/**/*.ts",
-    "../../packages/geo/src/**/*.ts"
+    "../../packages/geo/src/**/*.ts",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
   ],
   "exclude": ["node_modules"]
 }
