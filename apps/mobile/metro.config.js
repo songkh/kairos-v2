@@ -14,17 +14,15 @@ config.resolver.nodeModulesPaths = [
   path.resolve(workspaceRoot, 'node_modules'),
 ];
 
-// react-native-reanimated の Web 対応
+// Web ではネイティブ専用モジュールをスタブに差し替え
 config.resolver.resolveRequest = (context, moduleName, platform) => {
-  if (
-    moduleName === 'react-native-reanimated' &&
-    platform === 'web'
-  ) {
-    return context.resolveRequest(
-      context,
-      'react-native-reanimated/src/index.ts',
-      platform,
-    );
+  if (platform === 'web') {
+    const stubs = {
+      'react-native-reanimated': path.resolve(projectRoot, 'web-stubs/react-native-reanimated.js'),
+    };
+    if (stubs[moduleName]) {
+      return { filePath: stubs[moduleName], type: 'sourceFile' };
+    }
   }
   return context.resolveRequest(context, moduleName, platform);
 };
