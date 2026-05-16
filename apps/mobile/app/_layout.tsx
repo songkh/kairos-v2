@@ -17,7 +17,6 @@ export default function RootLayout() {
         <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="auth" />
         </Stack>
       </SafeAreaProvider>
     </GestureHandlerRootView>
