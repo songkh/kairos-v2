@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
+    "postinstall": "turbo run build --filter=@kairos/types --filter=@kairos/geo",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "type-check": "turbo run type-check",

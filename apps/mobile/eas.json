@@ -26,7 +26,9 @@
         "NODE_ENV": "production",
         "USE_MOCKS": "false"
       },
-      "prebuildCommand": "cd ../.. && pnpm turbo run build --filter=@kairos/types --filter=@kairos/geo"
+      "cache": {
+        "disabled": false
+      }
     },
     "production": {
       "autoIncrement": true,
