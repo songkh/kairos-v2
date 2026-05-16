@@ -14,4 +14,19 @@ config.resolver.nodeModulesPaths = [
   path.resolve(workspaceRoot, 'node_modules'),
 ];
 
+// react-native-reanimated の Web 対応
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  if (
+    moduleName === 'react-native-reanimated' &&
+    platform === 'web'
+  ) {
+    return context.resolveRequest(
+      context,
+      'react-native-reanimated/src/index.ts',
+      platform,
+    );
+  }
+  return context.resolveRequest(context, moduleName, platform);
+};
+
 module.exports = config;

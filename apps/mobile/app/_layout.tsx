@@ -1,5 +1,6 @@
 // expo-go-preview: Sentry は EAS build でのみ有効（Expo Go 非対応のため無効化）
 
+import 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
